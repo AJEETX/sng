@@ -13,6 +13,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ripp.Sng.Akka.Tester.Cli", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ripp.Sng.Akka.Base", "Ripp.Sng.Base.Akka\Ripp.Sng.Akka.Base.csproj", "{99D38435-1C46-4DA8-B9FA-B00749476A9E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C4C54983-4EFB-4F8F-87AD-977C21A30AC7}"
+	ProjectSection(SolutionItems) = preProject
+		readme.md = readme.md
+		sng.vbs = sng.vbs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
