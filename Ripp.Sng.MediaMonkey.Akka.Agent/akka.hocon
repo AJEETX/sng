@@ -1,0 +1,28 @@
+﻿akka {
+  loglevel = INFO
+  loggers = ["Akka.Logger.Serilog.SerilogLogger, Akka.Logger.Serilog"]
+  actor {
+	provider = "Akka.Cluster.ClusterActorRefProvider, Akka.Cluster"
+
+  }
+  
+  remote {
+	  log-sent-messages = off
+	  log-received-messages = off
+	  log-remote-lifecycle-events = on
+	dot-netty.tcp {
+	  transport-class = "Akka.Remote.Transport.DotNetty.TcpTransport, Akka.Remote"
+	  applied-adapters = []
+	  transport-protocol = tcp
+	  hostname = "0.0.0.0"
+	  port = 0
+	}
+  }            
+
+  cluster {
+	auto-down-unreachable-after = 5s
+	#will inject this node as a self-seed node at run-time
+	seed-nodes = ["akka.tcp://sng@127.0.0.1:4053"] 
+	roles = [mediamonkey]
+  }
+}

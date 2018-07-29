@@ -1,0 +1,53 @@
+lighthouse{
+  actorsystem: "sng"
+}
+
+# See petabridge.cmd configuration options here: https://cmd.petabridge.com/articles/install/host-configuration.html
+petabridge.cmd{
+	# default IP address used to listen for incoming petabridge.cmd client connections
+	# should be a safe default as it listens on "all network interfaces".
+	host = "0.0.0.0"
+
+	# default port number used to listen for incoming petabridge.cmd client connections
+	port = 9110
+}
+
+akka {
+  loglevel = DEBUG
+  loggers = ["Akka.Logger.Serilog.SerilogLogger, Akka.Logger.Serilog"]
+  actor {
+	provider = "Akka.Cluster.ClusterActorRefProvider, Akka.Cluster"
+				  debug {
+				  receive = off
+				  autoreceive = off
+				  lifecycle = off
+				  event-stream = off
+				  unhandled = on
+			  }
+			  
+  }
+  
+  remote {
+	  log-sent-messages = off
+	  log-received-messages = off
+	  log-remote-lifecycle-events = on
+		enabled-transports = ["akka.remote.dot-netty.tcp"]
+
+	dot-netty.tcp {
+	  transport-class = "Akka.Remote.Transport.DotNetty.TcpTransport, Akka.Remote"
+	  applied-adapters = []
+	  transport-protocol = tcp
+	  hostname = "0.0.0.0"
+	  port = 4053
+	}
+	log-remote-lifecycle-events = DEBUG
+
+  }            
+
+  cluster {
+	auto-down-unreachable-after = 5s
+	#will inject this node as a self-seed node at run-time
+	seed-nodes = [] 
+	roles = [lighthouse]
+  }
+}
